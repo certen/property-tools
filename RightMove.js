@@ -4,32 +4,43 @@ var cheerio = require('cheerio'); // cheerio mimics the DOM and jQuery/CSS style
 
 var geonoder = require('geonoder'); //used for geocoding
 
-function Property() {
-    this.address = "";
-    this.latitude = 0;
-    this.longitude = 0;
-    this.rooms =0;
-    this.price = 0;
-    this.desc = "";
-    this.Schedule = "";
-    this.EstateAgent ="";
-    this.imageLinks = "";
-    this.loc = 0;
-    this.saleID = "";
-    this.addedOn= "";
-    this.title = "";
-    this.desciption = "";
+console.log("Starting Rightmove.js at " + Date());
 
+
+
+function mysqlConnection()
+{
+    var db = mysql.createConnection ({
+        user : 'root',
+        password : 'C!01082e',
+        host : "localhost",
+        database : "reviews",
+        port : "3306"
+    });
+
+    return db;
 }
 
-function PropertyToString(prop) {
-    var ret = prop.title + " : " + prop.price + " ";
-    return ret;
+function insertPropertyToDb( id, address, site, title, price, description)
+{
+    var property = {
+        id : id,
+        address: address,
+        site: site,
+        title: title,
+        price : price,
+        description : description
+    }
+
+    var db = mysqlConnection();
+    db.connect();
+    db.query('INSERT IGNORE INTO properties SET ?', property);
+    db.end();
 }
+
 
 for(counter=10;counter<30;counter=counter+10){
-    var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&insId=2&minPrice=250000&maxPrice=350000&primaryDisplayPropertyType=flats&radius=0.5&index=' + counter;
-    //var url = 'http://www.rightmove.co.uk/property-for-sale/Edinburgh.html?index=' + counter;
+    var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&insId=2&minPrice=300000&maxPrice=400000&primaryDisplayPropertyType=flats&radius=0.5&index=' + counter;
     console.log(url);
     request(url, function(err, resp, body) {
 
@@ -49,14 +60,10 @@ for(counter=10;counter<30;counter=counter+10){
 
 
                 var address = $('#addresscontainer h2').text().replace(/\s+/g,' ');
-                var rooms = $('#propertyAddress h1').text().replace(/\s+/g,' ');
                 var price = $('#propertyprice').text().replace(/\s+/g,' ');
                 var description = $('.propertyDetailDescription').text().replace(/\s+/g,' ').replace(/'\'/,'');
-                var schedule = ('http://www.rightmove.co.uk' + $('#brochure-0-link').attr('href'));
-                var estate = $('#agentdetails h2').text().replace(/\s+/g,' ').replace(/'\'/,'');
-                var addOn = 'Not available.';
-                var tit = $('#displayaddress').text();
-                var desc = $('.propertyDetailDescription').text();
+                var tit = $('head title').text();
+
 
                 var imageLinksTemp=new Array();
                 links = $('.thumbnailimage a img');
@@ -65,10 +72,13 @@ for(counter=10;counter<30;counter=counter+10){
                     //console.log('imageLinks[' + i + ']' + imageLinks[i]);
                 });
 
-                console.log ('Title: ' + $('#fs-22 h1').text());
-                console.log ('Address: ' + $('#addresscontainer h2').text());
-                console.log ('Price: ' + $('#propertyprice').text());
-                console.log ('Description: ' + $('.propertyDetailDescription').text());
+
+                console.log ('Title: ' + tit);
+                console.log ('Address: ' + address);
+                console.log ('Price: ' + price);
+                console.log ('Description: ' + description);
+
+
                 //  console.log ('Images: ' + $('meta[property="og:image"]').attr('content'))
 
                 //console.log ('Images: ' + $('meta[property="og:image"]').attr('content'));
@@ -81,34 +91,12 @@ for(counter=10;counter<30;counter=counter+10){
 
                 });
                 function save(lattitude, longtitude) {
+                    console.log(lattitude + " " + longtitude)
+                    console.log(tit);
+                    insertPropertyToDb($(this).attr('href'),"rightmove", tit);
 
 
-                    var house = new Property({
-                        address: (address),
-                        latitude: (lattitude),
-                        longitude: (longtitude),
-                        rooms: (rooms),
-                        price: (price),
-                        desc: (description),
-                        Schedule: (schedule),
-                        EstateAgent: (estate),
-                        imageLinks: imageLinksTemp,
-                        loc: [(longtitude), (lattitude)],
-                        saleID: 'For Sale',
-                        addedOn: addOn,
-                        title :  tit,
-                        desciption :  desc
-                        //images:
-                    });
-
-                    console.log(PropertyToString(house));
                 }
-                /*console.log ('Title: ' + $('#propertyAddress h1').text());
-                 console.log ('Address: ' + $('#addresscontainer h2').text());
-                 console.log ('Price: ' + $('#propertyprice').text());
-                 console.log ('Description: ' + $('.propertyDetailDescription').text());
-                 console.log ('Images: ' + $('meta[property="og:image"]').attr('content'));*/
-
 
             });
         });
