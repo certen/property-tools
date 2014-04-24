@@ -63,7 +63,7 @@ for(counter=10;counter<100;counter=counter+10){
 
                 var address = $('#addresscontainer h2').text().replace(/\s+/g,' ');
                 var price = $('#propertyprice').text().replace(/\s+/g,' ');
-                var description = $('.propertyDetailDescription').text().replace(/\s+/g,' ').replace(/'\'/,'');
+                var description = $('.propertyDetailDescription').text().replace(/\s+/g,' ').replace(/'\'/,'').substring(0,200);
                 var tit = $('head title').text();
 
 
