@@ -42,7 +42,7 @@ function processAppComments(app)
     db1.connect();
 
     //id address site title price description location retrieved_date emailed
-    db1.query('SELECT * FROM properties  WHERE emailed=0 and  app = ? ORDER BY country ASC, rate DESC', app.id, function (error, rows) {
+    db1.query('SELECT * FROM properties  WHERE emailed=0 and  id = ?', app.id, function (error, rows) {
         if (error) {
             console.log(error);
         } else {
