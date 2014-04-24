@@ -58,7 +58,7 @@ function processAppComments(rows)
             var address = row.address;
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
-            text += index +' ------------------------------\n';
+            text += (index+1) +' ------------------------------\n';
             text += title + '\n';
             text += price + '\n';
             text += description + '\n';

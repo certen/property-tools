@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `properties`;
 CREATE TABLE IF NOT EXISTS `properties` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `site` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `site` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
