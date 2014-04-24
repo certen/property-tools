@@ -54,7 +54,7 @@ function processAppComments(app)
                 text +=  rows.length + ' new properties\n';
                 text += '------------------------------\n\n';
 
-
+                console.log("rows " + rows.length);
                 for (var index = 0; index < rows.length; index++) {
                     var row = rows[index];
 
@@ -78,11 +78,13 @@ function processAppComments(app)
 
                     text += '\n';
 
+                    console.log(title);
+
                 }
 
 
-               // sendEmail(text);
-                console.log(text);
+                sendEmail(text);
+               // console.log(text);
                 markReviewsAsEmailed(rows);
 
             }
