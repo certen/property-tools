@@ -24,7 +24,7 @@ function getMysqlConnection()
 
 var db = getMysqlConnection();
 db.connect();
-db.query('SELECT * FROM properties where emailed=0', function (appsError, apps) {
+db.query('SELECT id FROM properties where emailed=0', function (appsError, apps) {
     if (appsError) {
         console.log(appsError);
     } else {
@@ -36,8 +36,63 @@ db.query('SELECT * FROM properties where emailed=0', function (appsError, apps) 
 });
 
 
+function processAppComments(app)
+{
+    var db1 = getMysqlConnection();
+    db1.connect();
 
-function sendEmail(appName, body)
+    //id address site title price description location retrieved_date emailed
+    db1.query('SELECT * FROM properties  WHERE emailed=0 and  app = ? ORDER BY country ASC, rate DESC', app.id, function (error, rows) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("Property " + rows.length + " new properties for " + app.id);
+            if (rows.length > 0) {
+
+                var text = '------------------------------\n';
+                text +=  rows.length + ' new properties\n';
+                text += '------------------------------\n\n';
+
+
+                for (var index = 0; index < rows.length; index++) {
+                    var row = rows[index];
+
+
+                    var webaddress = row.site + row.id;
+                    var title = row.title;
+                    var price = row.price;
+                    var description = row.description;
+
+                    var address = row.address;
+                    var mapaddress = "https://www.google.co.uk/maps/search/" + address;
+
+
+
+                    text += index +' ------------------------------\n';
+                    text += title + '\n';
+                    text += price + '\n';
+                    text += description + '\n';
+                    text += webaddress + '\n';
+                    text += mapaddress + '\n';
+                    text += '------------------------------\n';
+
+
+                    text += '\n';
+
+                }
+
+
+               // sendEmail(text);
+                console.log(text);
+                markReviewsAsEmailed(rows);
+
+            }
+        }
+    });
+    db1.end();
+}
+
+function sendEmail( body)
 {
     var smtpTransport = nodemailer.createTransport("SMTP",{
         service: "Gmail",
@@ -49,9 +104,9 @@ function sendEmail(appName, body)
 
     smtpTransport.sendMail({
         from: "certen@gmail.com",
-        to: "erten@icloud.com",
-        subject: "New reviews for " + appName,
-        text: body,
+        to: "home@canerten.com",
+        subject: "New properties " ,
+        text: body
     }, function(error, response) {
         if (error) {
             console.log(error);

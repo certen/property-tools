@@ -40,7 +40,7 @@ function insertPropertyToDb( id, address, site, title, price, description)
 }
 
 
-for(counter=10;counter<30;counter=counter+10){
+for(counter=10;counter<100;counter=counter+10){
     var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&insId=2&minPrice=300000&maxPrice=400000&primaryDisplayPropertyType=flats&radius=0.5&index=' + counter;
     console.log(url);
     request(url, function(err, resp, body) {
