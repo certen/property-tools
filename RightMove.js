@@ -83,7 +83,7 @@ for(counter=10;counter<30;counter=counter+10){
 
                 //console.log ('Images: ' + $('meta[property="og:image"]').attr('content'));
 
-                geonoder.toCoordinates(address, geonoder.providers.google, function geo(lat, long) {
+          /*      geonoder.toCoordinates(address, geonoder.providers.google, function geo(lat, long) {
                     //console.log('Lat: ' + lat + ' Long: ' + long) //
                     var lattitude = lat;
                     var longtitude = long;
@@ -92,11 +92,13 @@ for(counter=10;counter<30;counter=counter+10){
                 });
                 function save(lattitude, longtitude) {
                     console.log(lattitude + " " + longtitude)
+                    */
                     console.log(tit);
-                    insertPropertyToDb($(this).attr('href'),"rightmove", tit);
+                    //( id, address, site, title, price, description)
+                    insertPropertyToDb($(this).attr('href'), address , "http://www.rightmove.co.uk" , tit, price, description);
 
 
-                }
+            /*    }*/
 
             });
         });

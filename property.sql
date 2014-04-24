@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS `properties` (
   `site` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location` Point DEFAULT NULL,
   `retrieved_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `emailed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
