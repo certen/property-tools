@@ -2,12 +2,8 @@ var request = require('request'); // lets you connect to web pages
 
 var cheerio = require('cheerio'); // cheerio mimics the DOM and jQuery/CSS style selectors
 
-var geonoder = require('geonoder'); //used for geocoding
-
 var mysql = require('mysql');
 console.log("Starting Rightmove.js at " + Date());
-
-
 
 function mysqlConnection()
 {
@@ -43,9 +39,17 @@ function insertPropertyToDb( id, address, site, title, price, description)
 //for(counter=50;counter<100;counter=counter+50){
     //var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&insId=2&minPrice=300000&maxPrice=400000&primaryDisplayPropertyType=flats&radius=0.5&index=' + counter;
     //var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&sortType=6&minPrice=300000&maxPrice=400000&displayPropertyType=flats&index=200';
-    var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&minPrice=300000&maxPrice=400000&displayPropertyType=flats&sortType=6&numberOfPropertiesPerPage=50';
+var n1 = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&minPrice=300000&maxPrice=420000&displayPropertyType=flats&sortType=6&numberOfPropertiesPerPage=50';
+var e3 = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E756&insId=2&sortType=6&minPrice=300000&maxPrice=420000&minBedrooms=2&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50';
+var n1environs = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=USERDEFINEDAREA^{%22id%22%3A2267199}&sortType=6&minPrice=300000&maxPrice=420000&minBedrooms=1&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50&viewType=LIST';
+ReadProperty(n1);
+ReadProperty(e3);
+ReadProperty(n1environs);
+
+function ReadProperty(url)
+{
     console.log(url);
-    request(url, function(err, resp, body) {
+    request(url, function (err, resp, body) {
 
         if (err)
 
@@ -53,58 +57,39 @@ function insertPropertyToDb( id, address, site, title, price, description)
 
         $ = cheerio.load(body);
 
-        $('.address.bedrooms a:contains()').each(function() {
-            var id =$(this).attr('href')
-            console.log (id);
+        $('.address.bedrooms a:contains()').each(function () {
+            var id = $(this).attr('href')
+            console.log(id);
 
-            request ('http://www.rightmove.co.uk' + $(this).attr('href'), function(err,resp,body) {
+            request('http://www.rightmove.co.uk' + $(this).attr('href'), function (err, resp, body) {
 
                 $ = cheerio.load(body);
 
-
-                var address = $('#addresscontainer h2').text().replace(/\s+/g,' ');
-                var price = $('#propertyprice').text().replace(/\s+/g,' ');
-                var description = $('.propertyDetailDescription').text().replace(/\s+/g,' ').replace(/'\'/,'').substring(0,200);
+                var address = $('#addresscontainer h2').text().replace(/\s+/g, ' ');
+                var price = $('#propertyprice').text().replace(/\s+/g, ' ');
+                var description = $('.propertyDetailDescription').text().replace(/\s+/g, ' ').replace(/'\'/, '').substring(0, 200);
                 var tit = $('head title').text();
 
 
-                var imageLinksTemp=new Array();
+                var imageLinksTemp = new Array();
                 links = $('.thumbnailimage a img');
-                $(links).each(function (i,link) {
-                    imageLinksTemp[i] =($(link).attr('src'));
+                $(links).each(function (i, link) {
+                    imageLinksTemp[i] = ($(link).attr('src'));
                     //console.log('imageLinks[' + i + ']' + imageLinks[i]);
                 });
 
 
-                console.log ('Title: ' + tit);
-                console.log ('id: ' + id);
-                console.log ('Address: ' + address);
-                console.log ('Price: ' + price);
-                console.log ('Description: ' + description);
+                console.log('Title: ' + tit);
+                console.log('id: ' + id);
+                console.log('Address: ' + address);
+                console.log('Price: ' + price);
+                console.log('Description: ' + description);
 
 
-                //  console.log ('Images: ' + $('meta[property="og:image"]').attr('content'))
-
-                //console.log ('Images: ' + $('meta[property="og:image"]').attr('content'));
-
-          /*      geonoder.toCoordinates(address, geonoder.providers.google, function geo(lat, long) {
-                    //console.log('Lat: ' + lat + ' Long: ' + long) //
-                    var lattitude = lat;
-                    var longtitude = long;
-                    save(lattitude, longtitude);
-
-                });
-                function save(lattitude, longtitude) {
-                    console.log(lattitude + " " + longtitude)
-                    */
-                    console.log(tit);
-                    //( id, address, site, title, price, description)
-                    insertPropertyToDb(id, address , "http://www.rightmove.co.uk" , tit, price, description);
-
-
-            /*    }*/
-
+                console.log(tit);
+                //( id, address, site, title, price, description)
+                insertPropertyToDb(id, address, "http://www.rightmove.co.uk", tit, price, description);
             });
         });
     });
-
+}
