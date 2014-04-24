@@ -6,6 +6,7 @@ console.log("Starting property-to-email.js at " + Date());
 
 
 var nodemailer = require("nodemailer");
+var escape = require('escape-html');
 
 var mysql = require('mysql');
 
@@ -64,9 +65,7 @@ function processAppComments(app)
                     var description = row.description;
 
                     var address = row.address;
-                    var mapaddress = "https://www.google.co.uk/maps/search/" + address;
-
-
+                    var mapaddress = "https://www.google.co.uk/maps/search/" + escape(address);
 
                     text += index +' ------------------------------\n';
                     text += title + '\n';
