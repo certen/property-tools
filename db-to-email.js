@@ -29,68 +29,56 @@ db.query('SELECT id FROM properties where emailed=0', function (appsError, apps)
     if (appsError) {
         console.log(appsError);
     } else {
-        for (var appIndex = 0; appIndex < apps.length; appIndex++) {
-            processAppComments(apps[appIndex]);
-        }
+        processAppComments(apps);
+
     }
     db.end();
 });
 
 
-function processAppComments(app)
+function processAppComments(rows)
 {
-    var db1 = getMysqlConnection();
-    db1.connect();
-
     //id address site title price description location retrieved_date emailed
-    db1.query('SELECT * FROM properties  WHERE emailed=0 and  id = ?', app.id, function (error, rows) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("Property " + rows.length + " new properties for " + app.id);
-            if (rows.length > 0) {
+    console.log("Property " + rows.length + " new properties ");
+    if (rows.length > 0) {
 
-                var text = '------------------------------\n';
-                text +=  rows.length + ' new properties\n';
-                text += '------------------------------\n\n';
-
-                console.log("rows " + rows.length);
-                for (var index = 0; index < rows.length; index++) {
-                    var row = rows[index];
+        var text = '------------------------------\n';
+        text +=  rows.length + ' new properties\n';
+        text += '------------------------------\n\n';
 
 
-                    var webaddress = row.site + row.id;
-                    var title = row.title;
-                    var price = row.price;
-                    var description = row.description;
+        for (var index = 0; index < rows.length; index++) {
+            var row = rows[index];
 
-                    var address = row.address;
-                    var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
+            var webaddress = row.site + row.id;
+            var title = row.title;
+            var price = row.price;
+            var description = row.description;
 
-                    text += index +' ------------------------------\n';
-                    text += title + '\n';
-                    text += price + '\n';
-                    text += description + '\n';
-                    text += webaddress + '\n';
-                    text += mapaddress + '\n';
-                    text += '------------------------------\n';
+            var address = row.address;
+            var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
-
-                    text += '\n';
-
-                    console.log(title);
-
-                }
+            text += index +' ------------------------------\n';
+            text += title + '\n';
+            text += price + '\n';
+            text += description + '\n';
+            text += webaddress + '\n';
+            text += mapaddress + '\n';
+            text += '------------------------------\n';
 
 
-                sendEmail(text);
-               // console.log(text);
-                markReviewsAsEmailed(rows);
+            text += '\n';
 
-            }
+            console.log(title);
+
         }
-    });
-    db1.end();
+        sendEmail(text);
+       // console.log(text);
+        markReviewsAsEmailed(rows);
+
+        }
+
+
 }
 
 function sendEmail( body)
@@ -112,7 +100,7 @@ function sendEmail( body)
         if (error) {
             console.log(error);
         } else {
-            console.log("Sending email for " + appName + " at " + Date() + " with response \n", response);
+            console.log("Sending email at " + Date() + " with response \n", response);
         }
 
         smtpTransport.close();
