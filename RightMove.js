@@ -35,7 +35,7 @@ function insertPropertyToDb( id, address, site, title, price, description)
 
     var db = mysqlConnection();
     db.connect();
-    db.query('INSERT IGNORE INTO properties SET ?', property);
+    db.query('INSERT  INTO properties SET ?', property);
     db.end();
 }
 
