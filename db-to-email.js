@@ -93,7 +93,7 @@ function sendEmail( body)
 
     smtpTransport.sendMail({
         from: "certen@gmail.com",
-        to: "home@canerten.com",
+        to: "erten@icloud.com, harriet.rawlings@icloud.com",
         subject: "New properties " ,
         text: body
     }, function(error, response) {
