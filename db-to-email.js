@@ -25,7 +25,7 @@ function getMysqlConnection()
 
 var db = getMysqlConnection();
 db.connect();
-db.query('SELECT id FROM properties where emailed=0', function (appsError, apps) {
+db.query('SELECT * FROM properties where emailed=0', function (appsError, apps) {
     if (appsError) {
         console.log(appsError);
     } else {
