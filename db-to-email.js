@@ -15,7 +15,7 @@ function getMysqlConnection()
         user : 'root',
         password : 'C!01082e',
         host : 'localhost',
-        database : 'reviews',
+        database : 'properties',
         port : "3306"
     });
 
