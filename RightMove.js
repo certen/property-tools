@@ -4,6 +4,7 @@ var cheerio = require('cheerio'); // cheerio mimics the DOM and jQuery/CSS style
 
 var geonoder = require('geonoder'); //used for geocoding
 
+var mysql = require('mysql');
 console.log("Starting Rightmove.js at " + Date());
 
 
@@ -51,8 +52,8 @@ for(counter=10;counter<30;counter=counter+10){
         $ = cheerio.load(body);
 
         $('.address.bedrooms a:contains()').each(function() {
-
-            console.log ($(this).attr('href'));
+            var id =$(this).attr('href')
+            console.log (id);
 
             request ('http://www.rightmove.co.uk' + $(this).attr('href'), function(err,resp,body) {
 
@@ -74,6 +75,7 @@ for(counter=10;counter<30;counter=counter+10){
 
 
                 console.log ('Title: ' + tit);
+                console.log ('id: ' + id);
                 console.log ('Address: ' + address);
                 console.log ('Price: ' + price);
                 console.log ('Description: ' + description);
@@ -95,7 +97,7 @@ for(counter=10;counter<30;counter=counter+10){
                     */
                     console.log(tit);
                     //( id, address, site, title, price, description)
-                    insertPropertyToDb($(this).attr('href'), address , "http://www.rightmove.co.uk" , tit, price, description);
+                    insertPropertyToDb(id, address , "http://www.rightmove.co.uk" , tit, price, description);
 
 
             /*    }*/
