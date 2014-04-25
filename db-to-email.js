@@ -63,7 +63,7 @@ function processAppComments(rows)
             text += price + '\n';
             text += description + '\n';
             text += webaddress + '\n';
-            text += mapaddress + '\n';
+           // text += mapaddress + '\n';
             text += '------------------------------\n';
 
 
