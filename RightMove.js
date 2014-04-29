@@ -94,7 +94,10 @@ function ReadProperty(url)
 
                 console.log(tit);
                 //( id, address, site, title, price, description)
-                insertPropertyToDb(id, address, "http://www.rightmove.co.uk", tit, price, description);
+                if (price != "" && id != "")
+                {
+                    insertPropertyToDb(id, address, "http://www.rightmove.co.uk", tit, price, description);
+                }
             });
         });
     });
