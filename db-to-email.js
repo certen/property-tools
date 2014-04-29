@@ -25,7 +25,7 @@ function getMysqlConnection()
 
 var db = getMysqlConnection();
 db.connect();
-db.query('SELECT * FROM properties where emailed=0', function (appsError, apps) {
+db.query('SELECT *, (  (SELECT  price as previousprice  FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date != properties.retrieved_date  order by retrieved_date limit 1)) FROM properties where emailed=0', function (appsError, apps) {
     if (appsError) {
         console.log(appsError);
     } else {
@@ -56,6 +56,7 @@ function processAppComments(rows)
             var description = row.description;
 
             var address = row.address;
+            var previousprice = row.previousprice;
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
             text += (index+1) +' ------------------------------\n';
@@ -63,6 +64,11 @@ function processAppComments(rows)
             text += price + '\n';
             text += description + '\n';
             text += webaddress + '\n';
+
+            if (previousprice != null && previousprice != "")
+            {
+                text += "Previous price:" + previousprice + '\n';
+            }
            // text += mapaddress + '\n';
             text += '------------------------------\n';
 
