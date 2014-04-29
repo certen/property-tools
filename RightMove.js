@@ -26,7 +26,8 @@ function insertPropertyToDb( id, address, site, title, price, description)
         site: site,
         title: title,
         price : price,
-        description : description
+        description : description,
+        emailed : false
     }
 
     var db = mysqlConnection();
@@ -72,7 +73,7 @@ function ReadProperty(url)
 
                 var address = $('#addresscontainer h2').text().replace(/\s+/g, ' ');
                 var price = $('#propertyprice').text().replace(/\s+/g, ' ');
-                var description = $('.propertyDetailDescription').text().replace(/\s+/g, ' ').replace(/'\'/, '').substring(0, 200);
+                var description = $('.propertyDetailDescription').text().replace(/\s+/g, ' ').replace(/'\'/, '');
                 var tit = $('head title').text();
 
 
