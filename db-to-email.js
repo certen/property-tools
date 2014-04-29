@@ -25,7 +25,7 @@ function getMysqlConnection()
 
 var db = getMysqlConnection();
 db.connect();
-db.query('SELECT *, (  (SELECT  price as previousprice  FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by desc retrieved_date limit 1)) FROM properties where emailed=0', function (appsError, apps) {
+db.query('SELECT *, (  (SELECT  price as previousprice  FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by  retrieved_date desc limit 1)) FROM properties where emailed=0', function (appsError, apps) {
     if (appsError) {
         console.log(appsError);
     } else {
