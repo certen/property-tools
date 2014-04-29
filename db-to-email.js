@@ -78,8 +78,8 @@ function processAppComments(rows)
             console.log(title);
 
         }
-       // sendEmail(text);
-        console.log(text);
+        sendEmail(text);
+       // console.log(text);
         markReviewsAsEmailed(rows);
 
         }
