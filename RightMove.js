@@ -42,9 +42,14 @@ function insertPropertyToDb( id, address, site, title, price, description)
 var n1 = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&minPrice=300000&maxPrice=420000&displayPropertyType=flats&sortType=6&numberOfPropertiesPerPage=50';
 var e3 = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E756&insId=2&sortType=6&minPrice=300000&maxPrice=420000&minBedrooms=2&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50';
 var n1environs = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=USERDEFINEDAREA^{%22id%22%3A2267199}&sortType=6&minPrice=300000&maxPrice=420000&minBedrooms=1&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50&viewType=LIST';
+var greenwich='http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=REGION%5E85358&insId=2&sortType=6&minPrice=300000&minBedrooms=2&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50&googleAnalyticsChannel=buying';
+var blackheath = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=REGION%5E85278&insId=3&sortType=6&minPrice=300000&minBedrooms=2&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50&googleAnalyticsChannel=buying';
+
 ReadProperty(n1);
 ReadProperty(e3);
 ReadProperty(n1environs);
+ReadProperty(greenwich);
+ReadProperty(blackheath);
 
 function ReadProperty(url)
 {
