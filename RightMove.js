@@ -72,7 +72,7 @@ function ReadProperty(url)
 
                 var address = $('#addresscontainer h2').text().replace(/\s+/g, ' ');
                 var price = $('#propertyprice').text().replace(/\s+/g, ' ');
-                var description = $('.propertyDetailDescription').text().replace(/\s+/g, ' ').replace(/'\'/, '').substring(0, 240);;
+                var description = $('.propertyDetailDescription').text().replace(/\s+/g, ' ').replace(/'\'/, '');
                 var tit = $('head title').text();
 
 

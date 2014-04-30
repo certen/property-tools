@@ -103,10 +103,10 @@ function sendEmail( body)
         subject: "New properties " ,
         text: body
     }, function(error, response) {
-        if (error) {
-            console.log(error);
-        } else {
+        if (!error) {
             console.log("Sending email at " + Date() + " with response \n", response);
+        } else {
+            console.error(error);
         }
 
         smtpTransport.close();
