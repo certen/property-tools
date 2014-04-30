@@ -57,10 +57,9 @@ function ReadProperty(url)
     console.log(url);
     request(url, function (err, resp, body) {
 
-        if (err)
-
-            throw err;
-
+        if (err) {
+            console.error(err);
+        }
         $ = cheerio.load(body);
 
         $('.address.bedrooms a:contains()').each(function () {
