@@ -49,8 +49,8 @@ var blackheath = 'http://www.rightmove.co.uk/property-for-sale/find.html?locatio
 ReadProperty(n1);
 ReadProperty(e3);
 ReadProperty(n1environs);
-ReadProperty(greenwich);
-ReadProperty(blackheath);
+//ReadProperty(greenwich);
+//ReadProperty(blackheath);
 
 function ReadProperty(url)
 {
