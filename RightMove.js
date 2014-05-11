@@ -50,7 +50,7 @@ ReadProperty(n1);
 ReadProperty(e3);
 ReadProperty(n1environs);
 //ReadProperty(greenwich);
-//ReadProperty(blackheath);
+ReadProperty(blackheath);
 
 function ReadProperty(url)
 {
