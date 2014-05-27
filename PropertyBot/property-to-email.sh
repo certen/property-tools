@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd /home/pi/property-tools/
+cd /home/pi/property-tools/PropertyBot
 /usr/local/bin/node db-to-email.js
