@@ -29,14 +29,14 @@ db.query('SELECT *, (  (SELECT  price   FROM properties p2 WHERE p2.id = propert
     if (appsError) {
         console.log(appsError);
     } else {
-        processAppComments(apps);
+        processProperties(apps);
 
     }
     db.end();
 });
 
 
-function processAppComments(rows)
+function processProperties(rows)
 {
     //id address site title price description location retrieved_date emailed
     console.log("Property " + rows.length + " new properties ");
@@ -80,7 +80,7 @@ function processAppComments(rows)
         }
         sendEmail(text);
        // console.log(text);
-        markReviewsAsEmailed(rows);
+        markAsEmailed(rows);
 
         }
 
@@ -113,7 +113,7 @@ function sendEmail( body)
     });
 }
 
-function markReviewsAsEmailed(reviews)
+function markAsEmailed(reviews)
 {
     var db = getMysqlConnection();
     db.connect();
