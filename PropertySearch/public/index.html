@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="site-wrapper  site-wrapper--home">
+
+
+
+            <div class="header-wrap--home">
+                <div class="header--home-aside">
+                    <a class="header__button--menu  js-trigger-main-menu" href="javascript:;">⇶</a>
+                </div>
+            </div>
+
+
+            <div id="" class="content-wrap--home">
+                <div id="content_homepage" class="content--home">
+                    <div class="cw--c">
+                        <a id="logo_homepage_link" class="logo-wrap--home" title="About DuckDuckGo" href="https://duckduckgo.com/about?t=i&amp;kd=-1">
+                            <div id="logo_homepage" class="logo_homepage">About DuckDuckGo</div>
+                        </a>
+
+                        <!--
+                                <a id="logo_homepage_link" title="Sean Connery" href="/?q=Sean+Connery">
+                                    <div id="logo_homepage">Sean Connery</div>
+                                </a>
+                                //-->
+
+                        <div class="search-wrap--home">
+                            <form id="search_form_homepage" class="search--home  js-search-init search--adv search--focus" name="x" method="GET" action="/">
+                                <input id="search_form_input_homepage" class="js-search-input search__input--adv" type="text" autocomplete="off" name="q" autofocus="" tabindex="1" onclick="if (is_mobile) DDG.toggle('footer_homepage');" onblur="if (is_mobile) DDG.toggle('footer_homepage',1)" value="" autocapitalize="off" autocorrect="off">
+                                <input id="search_button_homepage" class="search__button  js-search-button" type="submit" tabindex="2" value="S">
+                                <input id="search_form_input_clear" class="search__clear  empty  js-search-clear" type="button" tabindex="3" value="X">
+                                <a id="search_dropdown_homepage" class="search__dropdown" tabindex="-1" href="javascript:;" onclick="nbc(1);"></a>
+                                <select id="bang" class="hide" size="2" onchange="if (ip) nbb(this);" onclick="if (!ip) nbb(this);" onblur="nbc(1)"></select>
+                                <div id="search_elements_hidden" class="search__hidden">
+                                    <script type="text/javascript">
+                                        var karr = new Array('t','ka','kb','kc','kd','ke','kf','kg','kh','ki','kj','kk','kl','km','kn','ko','kp','kq','kr','ks','kt','ku','kv','kw','kx','ky','kz','k1','k2','k3','k4','k5','k6','k7','k8','k9','kaa','kab','kac','kad','kae','kaf','kag','kah','kai','kaj','kak','kal','kam','kan','kao','kap','kaq','kar','kas','kat','kau','kav','kaw','kax','kay','kaz','key');
+                                        for (var i=0;i<karr.length;i++) {
+                                            var kre=new RegExp('[\?\&]'+karr[i]+'=([^\&]+)');
+                                            var kre2=new RegExp('[\<\>\'\"\&\(\)]');
+                                            var ktmp='';
+
+                                            if (kre.test(window.location.href)) {
+                                                ktmp=decodeURIComponent(RegExp.$1);
+                                                if (kre2.test(ktmp)) continue;
+                                                if (ktmp.length<11) document.write('<input type="hidden" name="'+karr[i]+'" value="'+ktmp+'">');
+                                                eval(karr[i]+'=ktmp');
+                                            }
+
+                                            if (karr[i]=='ki' && ( (ktmp&&ktmp==-1) || DDG.cookie("i")=='-1' ) ) {
+                                                document.write('<input type="hidden" name="v" value="n">');
+
+                                            } else if (karr[i]=='kg') {
+                                                if ( (ktmp && ktmp=='p') || DDG.cookie("g")=='p') document.x.method='POST';
+                                                else document.x.method='GET';
+
+                                            } else if (karr[i]=='kh') {
+                                                if ( (!ktmp || ktmp=='1' || DDG.cookie("h") == '1' ) && !document.location.port && document.location.protocol != 'https:' && window.location.hostname.indexOf('.onion')==-1) document.x.action='https://'+window.location.host+'/';
+                                                else if ( ( (ktmp && ktmp=='-1') || DDG.cookie("h") == '-1' )  && document.location.protocol != 'http:') document.x.action='http://'+window.location.host+'/';
+                                                else document.x.action='/';
+                                            }
+                                        }
+
+                                        //console.log(w.key);
+                                    </script>
+                                </div>
+                                <div class="search__autocomplete" style="position: absolute; display: none;"><div class="acp-wrap"></div></div></form>
+
+
+                        </div>
+
+
+
+
+                        <!-- en_US All Settings -->
+
+                        <div id="tagline_homepage" class="tag-home">
+
+                            The search engine that doesn't track you.
+                            <a href="/whatsnew" class="r-block--screen-xs">What's new!</a>
+
+                            <!--
+                                <a href="http://donttrack.us/" class="tag-home__link">Search <em>Anonymously</em>.</a>
+                            &nbsp;<a href="/goodies/" class="tag-home__link">Find <em>Instantly</em>.</a>
+                            //-->
+                        </div>
+
+                        <div id="error_homepage"></div>
+
+
+
+
+                    </div> <!-- cw -->
+                </div> <!-- content_homepage //-->
+            </div> <!-- content_wrapper_homepage //-->
+            <div id="footer_homepage" class="foot-home">
+                <script type="text/javascript">
+                    nib(0,'btn--home js-modal','','</span>',0,0,'<i class="btn--home__icon  ddgst-add"></i> <span>');
+                    nib(0,'btn--home js-modal','','</span>',0,1,'<i class="btn--home__icon  ddgst-home"></i> <span>');
+                </script><span class="modal_trig"></span><a data-modal="add_to_browser" tabindex="-1" href="javascript:;" class="btn--home js-modal" onclick=""><i class="btn--home__icon  ddgst-add"></i> <span>Use in <span>Safari</span></span></a><span class="modal_trig"></span><a data-modal="add_to_browser_homepage" tabindex="-1" href="javascript:;" class="btn--home js-modal" onclick=""><i class="btn--home__icon  ddgst-home"></i> <span>Set as <span>Homepage</span></span></a>
+	<span class="modal_trig">
+		<div id="learn_more_modal" class="modal grp_modal is-3-of-3">
+            <i class="logo_modal"></i>
+            <h4 class="modal__title">More DuckDuckGo?</h4>
+            <div class="modal__buttons">
+                <a target="about" href="/about" class="btn">About</a>
+                <a target="about" href="https://duck.co" class="btn">Community</a>
+            </div>
+        </div>
+	</span>
+                <a href="https://duck.co" class="btn--home  js-modal" data-modal="learn_more_modal"><i class="btn--home__icon  ddgst-more"></i> Learn <span>More</span></a>
+
+            </div>
+
+
+
+            <div id="add_to_browser" class="modal grp_modal"></div>
+            <div id="add_to_browser_homepage" class="modal grp_modal"></div>
+        </div>
+
+
+
+
+
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>
