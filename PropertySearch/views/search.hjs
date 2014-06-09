@@ -13,6 +13,9 @@
     </form>
 
 <ol>
+{{#noresults}}
+No Results were found.
+ {{/noresults}}
     {{#results}}
     <li><a href="{{link}}" target="_blank">{{header}}</a><br/>
     {{content}} <br/>
@@ -20,6 +23,8 @@
       Current Price : {{price}}  - Previous Price:{{previousprice}}
 
     {{/results}}
+
+
 </ol>
 </body>
 </html>

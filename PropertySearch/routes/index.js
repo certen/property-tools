@@ -35,7 +35,8 @@ function processProperties(rows, res, query)
     res.render('search',
         {
             query: query,
-            results : someresults
+            results : someresults,
+            noresults : someresults.length == 0
         });
 }
 function connecttodb(res, query) {
@@ -79,11 +80,9 @@ function connecttodb(res, query) {
 });
 }
 
-
-/* GET home page. */
 router.get('/', function(req, res) {
     res.render('index', { title: 'Property Search Engine' });
-    //res.send('Property SearchEngine');
+
 });
 
 router.get('/search', function(req, res) {
@@ -91,11 +90,6 @@ router.get('/search', function(req, res) {
     connecttodb(res, query);
 
 
-});
-
-router.get('/search/q/:q/start/:s', function(req, res) {
-    //res.render('index', { title: 'Express' });
-    res.send('Searching ' + req.param("q") + ' ' + req.param("s"));
 });
 
 module.exports = router;
