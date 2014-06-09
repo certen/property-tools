@@ -58,10 +58,12 @@ function connecttodb(res, query) {
 
     var db = getMysqlConnection();
     db.connect();
-    var criteria = db.escape(query);
+    var criteria = '\'%'+query+'%\'' ;
+
+    criteria = db.escape(criteria);
 
     var sql = 'SELECT *, (  (SELECT  price   FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by  retrieved_date desc limit 1)) as previousprice FROM properties';
-    sql += ' where title like  \'%'+criteria+'%\' or  description like \'%'+criteria+'%\' limit 20';
+    sql += ' where title like '+criteria+'  or  description like '+criteria+' limit 20';
     console.log(sql);
 
     db.query(sql, function (appsError, apps)
