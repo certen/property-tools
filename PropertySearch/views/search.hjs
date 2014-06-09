@@ -5,13 +5,18 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>Results {{ query }}</h1>
+
+ <form action="/search" method="get" enctype="multipart/form-data">
+    <input type="text" name="searchstring" value={{ query }}/>
+
+     <input type="submit" value="Search"/>
+    </form>
 
 <ol>
     {{#results}}
-    <li><a href="{{link}}">{{header}}</a><br/>
+    <li><a href="{{link}}" target="_blank">{{header}}</a><br/>
     {{content}} <br/>
-     <a href="{{map}}">Show Map</a></li>
+     <a href="{{map}}" target="_blank">Show Map</a></li>
       Current Price : {{price}}  - Previous Price:{{previousprice}}
 
     {{/results}}
