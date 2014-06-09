@@ -20,7 +20,7 @@ No Results were found.
     <li><a href="{{link}}" target="_blank">{{header}}</a><br/>
     {{content}} <br/>
      <a href="{{map}}" target="_blank">Show Map</a></li>
-      Current Price : {{price}}  - {{#previousprice}}  Previous Price:{{previousprice}} {{#previousprice}}
+      Current Price : {{price}}  - {{#previousprice}}  Previous Price:{{previousprice}} {{/previousprice}}
 
     {{/results}}
 
