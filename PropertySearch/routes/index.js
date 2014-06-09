@@ -25,7 +25,7 @@ function processProperties(rows, res, query)
             var curr_month = d.getMonth();
             curr_month++;
             var curr_year = d.getFullYear();
-            var retrieved_date = curr_date + "/" + curr_month  + "/" + curr_year);
+            var retrieved_date = curr_date + "/" + curr_month  + "/" + curr_year;
 
 
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
