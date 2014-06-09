@@ -19,7 +19,7 @@ function processProperties(rows, res, query)
 
             var address = row.address;
             var previousprice = row.previousprice;
-            var retrieved_date = row.retrieved_date;
+            var retrieved_date = row.retrieved_date.format("dd/mm/yyyy");
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
 
