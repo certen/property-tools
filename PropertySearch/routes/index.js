@@ -5,8 +5,8 @@ function processProperties(rows, res, query)
 {
     //id address site title price description location retrieved_date emailed
     console.log("Property " + rows.length + " new properties ");
+    var someresults = [];
     if (rows.length > 0) {
-        var someresults = [];
 
         for (var index = 0; index < rows.length; index++) {
 
@@ -31,13 +31,12 @@ function processProperties(rows, res, query)
             someresults.push(result1);
 
         }
-
-        res.render('search',
-            {
-                query: query,
-                results : someresults
-            });
     }
+    res.render('search',
+        {
+            query: query,
+            results : someresults
+        });
 }
 function connecttodb(res, query) {
     var mysql = require('mysql');
@@ -59,7 +58,7 @@ function connecttodb(res, query) {
     db.connect();
 
     var sql = 'SELECT *, (  (SELECT  price   FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by  retrieved_date desc limit 1)) as previousprice FROM properties';
-    sql += ' where description like \'%'+query+'%\' limit 10';
+    sql += ' where title like  \'%'+query+'%\' or  description like \'%'+query+'%\' limit 10';
     console.log(sql);
 
     db.query(sql, function (appsError, apps)

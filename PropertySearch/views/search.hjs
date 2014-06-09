@@ -7,7 +7,7 @@
 <body>
 
  <form action="/search" method="get" enctype="multipart/form-data">
-    <input type="text" name="searchstring" value={{ query }}/>
+    <input type="text" name="searchstring" value={{query}}/>
 
      <input type="submit" value="Search"/>
     </form>
