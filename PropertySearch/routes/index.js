@@ -63,7 +63,7 @@ function connecttodb() {
 
     var db = getMysqlConnection();
     db.connect();
-    db.query('SELECT *, (  (SELECT  price   FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by  retrieved_date desc limit 1)) as previousprice FROM properties where emailed=0', function (appsError, apps)
+    db.query('SELECT *, (  (SELECT  price   FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by  retrieved_date desc limit 1)) as previousprice FROM properties limit 10', function (appsError, apps)
     {
         if (appsError) {
             console.log(appsError);
