@@ -32,6 +32,7 @@ function processProperties(rows, res, query)
 
         }
     }
+    console.log(query);
     res.render('search',
         {
             query: query,
