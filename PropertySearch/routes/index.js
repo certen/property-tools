@@ -3,8 +3,8 @@ var router = express.Router();
 
 function processProperties(rows, res, query)
 {
-    //id address site title price description location retrieved_date emailed
-    console.log("Property " + rows.length + " new properties ");
+
+    console.log( rows.length + " results for query " + query);
     var someresults = [];
     if (rows.length > 0) {
 
@@ -21,7 +21,6 @@ function processProperties(rows, res, query)
             var previousprice = row.previousprice;
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
-            console.log(titlewithcost);
 
             result1 = {header:title, content:description, link:webaddress,price:price, previousprice:previousprice, map:mapaddress};
 
