@@ -9,7 +9,11 @@
 
 <ol>
     {{#results}}
-    <li>{{header}} <br/> {{content}}</li>
+    <li><a href="{{link}}">{{header}}</a><br/>
+    {{content}} <br/>
+     <a href="{{map}}">Show Map</a></li>
+      Current Price : {{price}}  - Previous Price:{{previousprice}}
+
     {{/results}}
 </ol>
 </body>

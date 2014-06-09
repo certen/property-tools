@@ -6,14 +6,10 @@ function processProperties(rows, res, query)
     //id address site title price description location retrieved_date emailed
     console.log("Property " + rows.length + " new properties ");
     if (rows.length > 0) {
-
-        var text = '------------------------------\n';
-        text +=  rows.length + ' new properties\n';
-        text += '------------------------------\n\n';
-
         var someresults = [];
 
         for (var index = 0; index < rows.length; index++) {
+
             var row = rows[index];
 
             var webaddress = row.site + row.id;
@@ -25,25 +21,12 @@ function processProperties(rows, res, query)
             var previousprice = row.previousprice;
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
-            //text += (index+1) +' ------------------------------\n';
 
-            text += price + '\n';
-            text += description + '\n';
-            text += webaddress + '\n';
+            var titlewithcost = title + "-" + price;
 
-            if (previousprice != null && previousprice != "")
-            {
-                text += "Previous price:" + previousprice + '\n';
-            }
-            // text += mapaddress + '\n';
-            text += '------------------------------\n';
+            console.log(titlewithcost);
 
-
-            text += '\n';
-
-            console.log(title);
-
-            result1 = {header:title, content:text};
+            result1 = {header:titlewithcost, content:description, link:webaddress,price:price, previousprice:previousprice, map:mapaddress};
 
             someresults.push(result1);
 
