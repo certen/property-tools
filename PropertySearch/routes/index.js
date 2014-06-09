@@ -21,12 +21,9 @@ function processProperties(rows, res, query)
             var previousprice = row.previousprice;
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
-
-            var titlewithcost = title + "-" + price;
-
             console.log(titlewithcost);
 
-            result1 = {header:titlewithcost, content:description, link:webaddress,price:price, previousprice:previousprice, map:mapaddress};
+            result1 = {header:title, content:description, link:webaddress,price:price, previousprice:previousprice, map:mapaddress};
 
             someresults.push(result1);
 

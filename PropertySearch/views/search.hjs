@@ -17,10 +17,13 @@
 No Results were found.
  {{/noresults}}
     {{#results}}
-    <li><a href="{{link}}" target="_blank">{{header}}</a><br/>
-    {{content}} <br/>
-     <a href="{{map}}" target="_blank">Show Map</a></li>
-      Current Price : {{price}}  - {{#previousprice}}  Previous Price:{{previousprice}} {{/previousprice}}
+    <li>
+        <a href="{{link}}" target="_blank">{{header}}</a><br/>
+        Current Price : {{price}}   {{#previousprice}} -  Previous Price:{{previousprice}} {{/previousprice}} </br>
+
+        {{content}} ... <a href="{{map}}" target="_blank">Show Map</a>
+    </li>
+
 
     {{/results}}
 
