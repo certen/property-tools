@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-function processProperties(rows)
+function processProperties(rows, res, query)
 {
     //id address site title price description location retrieved_date emailed
     console.log("Property " + rows.length + " new properties ");
@@ -11,6 +11,7 @@ function processProperties(rows)
         text +=  rows.length + ' new properties\n';
         text += '------------------------------\n\n';
 
+        var someresults = [];
 
         for (var index = 0; index < rows.length; index++) {
             var row = rows[index];
@@ -25,7 +26,7 @@ function processProperties(rows)
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
             //text += (index+1) +' ------------------------------\n';
-            text += title + '\n';
+
             text += price + '\n';
             text += description + '\n';
             text += webaddress + '\n';
@@ -42,10 +43,20 @@ function processProperties(rows)
 
             console.log(title);
 
+            res = {header:title, content:text};
+
+            someresults.push(res);
+
         }
+
+        res.render('search',
+            {
+                query: query,
+                results : someresults
+            });
     }
 }
-function connecttodb() {
+function connecttodb(res, query) {
     var mysql = require('mysql');
 
     function getMysqlConnection()
@@ -67,8 +78,14 @@ function connecttodb() {
     {
         if (appsError) {
             console.log(appsError);
+            res.render('search', { query: query,
+                results : [
+                    {
+                        header: "somewhere", content: "abc"
+                    }
+                ]});
         } else {
-            processProperties(apps);
+            processProperties(apps, res, query);
 
         }
         db.end();
@@ -84,13 +101,8 @@ router.get('/', function(req, res) {
 
 router.get('/search', function(req, res) {
     var query = req.param("searchstring");
-    connecttodb();
-    res.render('search', { query: query,
-        results : [
-            {
-                header: "somewhere", content: "abc"
-            }
-        ]});
+    connecttodb(res, query);
+
 
 });
 
