@@ -43,9 +43,9 @@ function processProperties(rows, res, query)
 
             console.log(title);
 
-            res = {header:title, content:text};
+            result1 = {header:title, content:text};
 
-            someresults.push(res);
+            someresults.push(result1);
 
         }
 
