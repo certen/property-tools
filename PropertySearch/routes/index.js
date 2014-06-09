@@ -42,7 +42,8 @@ function processProperties(rows, res, query)
         {
             query: query,
             results : someresults,
-            noresults : someresults.length == 0
+            noresults : someresults.length == 0,
+            title: 'Property Search'
         });
 }
 function connecttodb(res, query) {

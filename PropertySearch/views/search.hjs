@@ -5,8 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-
- <form action="/search" method="get" enctype="multipart/form-data">
+<h1>{{ title }}</h1>
+ <form action="search" method="get" enctype="multipart/form-data">
     <input type="text" name="searchstring" value="{{query}}">
 
      <input type="submit" value="Search"/>
