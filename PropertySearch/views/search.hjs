@@ -20,6 +20,7 @@ No Results were found.
     <li>
         <a href="{{link}}" target="_blank">{{header}}</a><br/>
         Current Price : {{price}}   {{#previousprice}} -  Previous Price:{{previousprice}} {{/previousprice}} </br>
+        Added : {{added}} </br>
 
         {{content}} ... <a href="{{map}}" target="_blank">Show Map</a>
     </li>

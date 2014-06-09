@@ -19,10 +19,11 @@ function processProperties(rows, res, query)
 
             var address = row.address;
             var previousprice = row.previousprice;
+            var retrieved_date = row.retrieved_date;
             var mapaddress = "https://www.google.co.uk/maps/search/" + encodeURIComponent(address);
 
 
-            result1 = {header:title, content:description, link:webaddress,price:price, previousprice:previousprice, map:mapaddress};
+            result1 = {header:title, content:description, link:webaddress,price:price, previousprice:previousprice, map:mapaddress,added:retrieved_date};
 
             someresults.push(result1);
 
