@@ -60,6 +60,7 @@ function connecttodb(res, query) {
 
     var sql = 'SELECT *, (  (SELECT  price   FROM properties p2 WHERE p2.id = properties.id and p2.retrieved_date < properties.retrieved_date  order by  retrieved_date desc limit 1)) as previousprice FROM properties';
     sql += 'description like \'%'+query+'%\' limit 10';
+    console.log(sql);
 
     db.query(sql, function (appsError, apps)
     {
