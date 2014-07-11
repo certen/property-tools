@@ -28,9 +28,14 @@ function insertPropertyToDb( id, address, site, title, price, description)
         emailed : false
     }
     pool.getConnection(function(err, connection) {
-        connection.query('INSERT IGNORE INTO properties SET ?', property);
-        connection.release();
-        console.log("id upsert " + id);
+        if (err) {
+            console.error(err);
+        }
+        else {
+            connection.query('INSERT IGNORE INTO properties SET ?', property);
+            connection.release();
+            console.log("id upsert " + id);
+        }
     });
 
 }
