@@ -7,7 +7,7 @@ console.log("Starting Rightmove.js at " + Date());
 
 function mysqlConnection()
 {
-    var db = mysql.createConnection ({
+    var pool  = mysql.createPool ({
         user : 'root',
         password : 'C!01082e',
         host : "localhost",
@@ -15,8 +15,10 @@ function mysqlConnection()
         port : "3306"
     });
 
-    return db;
+    return pool;
 }
+
+var pool  = mysqlConnection();
 
 function insertPropertyToDb( id, address, site, title, price, description)
 {
@@ -29,11 +31,11 @@ function insertPropertyToDb( id, address, site, title, price, description)
         description : description,
         emailed : false
     }
+    pool.getConnection(function(err, connection) {
+        connection.query('INSERT IGNORE INTO properties SET ?', property);
+        connection.release();
+    });
 
-    var db = mysqlConnection();
-    db.connect();
-    db.query('INSERT IGNORE INTO properties SET ?', property);
-    db.end();
 }
 
 
