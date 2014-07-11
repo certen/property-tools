@@ -5,20 +5,16 @@ var cheerio = require('cheerio'); // cheerio mimics the DOM and jQuery/CSS style
 var mysql = require('mysql');
 console.log("Starting Rightmove.js at " + Date());
 
-function mysqlConnection()
-{
-    var pool  = mysql.createPool ({
-        user : 'root',
-        password : 'C!01082e',
-        host : "localhost",
-        database : "properties",
-        port : "3306"
-    });
 
-    return pool;
-}
+var pool  = mysql.createPool ({
+    user : 'root',
+    password : 'C!01082e',
+    host : "localhost",
+    database : "properties",
+    port : "3306"
+});
 
-var pool  = mysqlConnection();
+
 
 function insertPropertyToDb( id, address, site, title, price, description)
 {
@@ -34,6 +30,7 @@ function insertPropertyToDb( id, address, site, title, price, description)
     pool.getConnection(function(err, connection) {
         connection.query('INSERT IGNORE INTO properties SET ?', property);
         connection.release();
+        console.log("id upsert " + id);
     });
 
 }
