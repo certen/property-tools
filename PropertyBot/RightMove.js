@@ -7,6 +7,7 @@ console.log("Starting Rightmove.js at " + Date());
 
 
 var pool  = mysql.createPool ({
+    connectionLimit : 5,
     user : 'root',
     password : 'C!01082e',
     host : "localhost",
@@ -32,18 +33,22 @@ function insertPropertyToDb( id, address, site, title, price, description)
             console.error(err);
         }
         else {
-            connection.query('INSERT IGNORE INTO properties SET ?', property);
-            connection.release();
-            console.log("id upsert " + id);
+            connection.query('INSERT IGNORE INTO properties SET ?', property, function(err) {
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    console.log("id upsert " + id);
+                }
+                connection.release();
+
+            });
+
+
         }
     });
-
 }
 
-
-//for(counter=50;counter<100;counter=counter+50){
-    //var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&insId=2&minPrice=300000&maxPrice=400000&primaryDisplayPropertyType=flats&radius=0.5&index=' + counter;
-    //var url = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&sortType=6&minPrice=300000&maxPrice=400000&displayPropertyType=flats&index=200';
 var n1 = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E1666&minPrice=300000&maxPrice=420000&displayPropertyType=flats&sortType=6&numberOfPropertiesPerPage=50';
 var e3 = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=OUTCODE%5E756&insId=2&sortType=6&minPrice=210000&maxPrice=420000&minBedrooms=2&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50';
 var n1environs = 'http://www.rightmove.co.uk/property-for-sale/find.html?locationIdentifier=USERDEFINEDAREA^{%22id%22%3A2267199}&sortType=6&minPrice=300000&maxPrice=420000&minBedrooms=1&displayPropertyType=flats&oldDisplayPropertyType=flats&numberOfPropertiesPerPage=50&viewType=LIST';
